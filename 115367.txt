@@ -1,0 +1,81 @@
+library(readxl)
+R_data <- read_excel("C:/Users/ashbe/Downloads/R data.xlsx")
+View(R_data)
+install.packages("ggplot2")
+library(ggplot2)
+
+
+#QUESTION_1
+#a...Creating a ggplot
+ggplot(data = R_data,aes(Ksh),xlab("Ksh"),ylab("count"),)+geom_bar()
+
+#b.Creating a histogram
+hist(x = R_data$Ksh,xlab = "Kenya shillings",ylab = "Frequency",main = "Histogram of money data",col=c("blue","red"))
+
+#QUESTION_2
+#a.Scatter plot for speed against time
+View(cars)
+plot(x=cars$speed,y=cars$dist,col="red",xlab = "Speed",ylab = "Distance")
+
+#b.correlation between speed and distance
+cor(x=cars$speed,cars$dist)
+#Yes.There is a high positive correlation between speed and distance
+
+#C.Line of best fit that expresses distance as a function of speed
+abline(lm(cars$speed ~ cars$dist, data = cars), col="blue")
+
+#D.Interpreting results
+summary(lm(cars$dist~cars$speed))
+#d.the p-value is less than the significance level so we reject the null hypothesis.
+#This shows that there is evidence that distance is associated with speed.
+
+
+#QUESTION_3
+library(readxl)
+Salaries <- read_excel("C:/Users/ashbe/Downloads/Salaries.xlsx")
+
+#a.i)
+#No.of professors/associate_professors/assistant_professors
+table(Salaries$rank)
+
+#a.ii)
+#No. of male and female staff present
+table(Salaries$sex)
+
+#b.i)
+#Measures of central tendency
+
+#Mean
+mean(Salaries$salary)
+
+#Median
+median(Salaries$salary)
+
+#Mode
+max(table(Salaries$salary))
+table(Salaries$salary) == 5 
+names(table(Salaries$salary))[which(table(Salaries$salary) == 5) ]
+
+#ii)
+#Measures of central dispersion
+
+#standard deviation
+ sd(Salaries$salary)
+
+#Range
+range(Salaries$salary)
+
+#Interquartile range
+IQR(Salaries$salary)
+
+#C.i)
+#plot of Years of service against Salaries
+plot(x=Salaries$yrs.service,y=Salaries$salary,xlab = "Years of service",ylab = "Salaries",col="red",pch=19,main = "Plot of serive against Salaries")
+
+#ii)
+#Dotplot for rank versus salary
+ggplot(data = Salaries,aes(x=rank,y=salary,))+geom_point()
+#From the graph of years of service against salaries,as years of service increase so does the salary hence an increase in years of service leads to an increase in salary
+#From the dotplot of rank versus salary, the higher the rank(professor>associate_professor>assistant_professor) the hihger the salary
+
+
